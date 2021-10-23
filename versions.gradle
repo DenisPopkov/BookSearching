@@ -1,0 +1,52 @@
+ext.app = [
+        appname     : 'BookSearch.ru',
+        apkname     : 'booksearch',
+        packagename : 'ru.popkov.booksearch',
+
+        versionMajor: 0,
+        versionMinor: 100,
+        versionPatch: 0,
+]
+
+ext.versions = [
+        minSdk     : 21,
+        targetSdk  : 31,
+        compileSdk : 31,
+
+        buildTools : "30.0.3",
+        kotlin_version : "1.5.31",
+
+        // MVP
+        moxyVersion: '2.2.2',
+
+        // DI
+        hilt       : '2.39.1',
+
+        // I/O
+        coroutines : '1.4.3',
+
+        // Navigation
+        cicerone   : '7.0',
+
+        // Network
+        retrofit   : '2.9.0',
+        okhttp     : '4.9.0',
+        gson       : '2.8.6',
+
+        // Glide
+        glide      : '4.12.0',
+]
+
+ext.buildApkName = {
+    return "${app.apkname}-v${buildVersionName()}"
+}
+
+ext.buildVersionCode = {
+    return app.versionMajor * 1000000 +
+            app.versionMinor * 1000 +
+            app.versionPatch
+}
+
+ext.buildVersionName = {
+    return "${app.versionMajor}.${app.versionMinor}.${app.versionPatch}"
+}

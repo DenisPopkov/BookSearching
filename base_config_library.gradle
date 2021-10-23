@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: "$rootDir/versions.gradle"
+apply from: "$rootDir/base_config_android.gradle"
+
+android {
+    compileOptions {
+        coreLibraryDesugaringEnabled = true
+    }
+}
+
+dependencies {
+
+    // Desugar java 8 API
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+}
