@@ -1,4 +1,4 @@
-package ru.popkov.app_data
+package ru.popkov.data
 
 import org.junit.Test
 

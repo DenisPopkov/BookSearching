@@ -37,6 +37,13 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-compiler:$versions.hilt"
+    implementation "io.insert-koin:koin-android:${versions.koin}"
 
     // Moxy
     implementation "com.github.moxy-community:moxy:$versions.moxyVersion"

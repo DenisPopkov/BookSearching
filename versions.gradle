@@ -19,8 +19,12 @@ ext.versions = [
         // MVP
         moxyVersion: '2.2.2',
 
+        // Lifecycle
+        lifecycle: "2.3.1",
+
         // DI
-        hilt       : '2.39.1',
+        hilt: '2.39.1',
+        koin: "3.0.1",
 
         // I/O
         coroutines : '1.4.3',

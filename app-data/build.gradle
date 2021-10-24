@@ -13,6 +13,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
 
+    implementation "io.insert-koin:koin-android:${versions.koin}"
+
     // Gson
     implementation "com.google.code.gson:gson:$versions.gson"
 

@@ -1,4 +1,4 @@
-package ru.popkov.app_data
+package ru.popkov.data
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

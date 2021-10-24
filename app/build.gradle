@@ -49,6 +49,7 @@ dependencies {
     //Hilt
     implementation "com.google.dagger:hilt-android:$versions.hilt"
     kapt "com.google.dagger:hilt-compiler:$versions.hilt"
+    implementation "io.insert-koin:koin-android:${versions.koin}"
 
     // UI Androidx
     implementation 'androidx.core:core-ktx:1.6.0'

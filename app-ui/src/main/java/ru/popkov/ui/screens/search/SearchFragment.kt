@@ -1,22 +1,57 @@
 package ru.popkov.ui.screens.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import ru.popkov.ui.R
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
+import ru.popkov.domain.model.BookModel
+import ru.popkov.ui.common.mvp.base.BaseFragment
+import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment() {
+class SearchFragment :
+    BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
+    SelectionApartmentTypeView {
 
-    private lateinit var binding: FragmentSearchBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+    @InjectPresenter
+    lateinit var presenter: SearchPresenter
 
-        return binding.root
+    @ProvidePresenter
+    fun providePresenter(): SearchPresenter {
+
+        return SearchPresenter()
+    }
+
+    private val apartmentTypesAdapter by lazy {
+        SimpleAdapter(BookItemBinding::inflate,
+            createViewHolder = {
+                ApartmentViewHolder(it, requireContext())
+            }, onClickCallback = { type, _ ->
+                presenter.navigateToArticle()
+            }
+        )
+    }
+
+    override fun initViews() {
+        initAdapters()
+    }
+
+    override fun showApartmentTypesList(items: List<BookModel>) {
+        apartmentTypesAdapter.swapItems(items)
+    }
+
+    override fun showNoInternetAlert() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showServerAlert() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showUnknownAlert(message: String?) {
+        TODO("Not yet implemented")
+    }
+
+    private fun initAdapters() {
+        binding.bookRecycler.adapter = apartmentTypesAdapter
     }
 }
