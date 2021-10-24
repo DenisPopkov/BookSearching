@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">Уточните параметры, по которым искать книги</string>
+    <string name="filter_all">Поиск по всему</string>
+    <string name="filter_author">Поиск по автору</string>
+    <string name="filter_title">Поиск по названию</string>
+    <string name="filter_genre">Поиск по жанру</string>
+    <string name="filter_publisher">Поиск по издателю</string>
+</resources>

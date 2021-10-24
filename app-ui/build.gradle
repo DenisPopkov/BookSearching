@@ -2,10 +2,15 @@ apply from: "$rootDir/base_config_library.gradle"
 
 apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
+apply plugin: 'kotlin-android'
 
 android {
     androidExtensions {
         experimental = true
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     sourceSets {
@@ -13,6 +18,11 @@ android {
             res.srcDirs = ['src/main/res']
             file('src/main/res-screen')
                     .eachFile { res.srcDirs += it.path }
+            file('src/main/res-component')
+                    .eachFile { res.srcDirs += it.path }
+            resources {
+                srcDirs 'src\\main\\resources', 'src\\main\\res-component\\toolbars', 'src\\main\\res-component\\books', 'src\\main\\res-screen\\filter'
+            }
         }
     }
 }
@@ -31,6 +41,7 @@ dependencies {
     // Moxy
     implementation "com.github.moxy-community:moxy:$versions.moxyVersion"
     implementation "com.github.moxy-community:moxy-androidx:$versions.moxyVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.github.moxy-community:moxy-compiler:$versions.moxyVersion"
 
     // Cicerone

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="start_date">Дата начала</string>
+    <string name="book_state">Нужная книга всегда найдётся</string>
 </resources>

@@ -3,7 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/books/drawable/filter_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/books/layout/book_item.xml" value="0.4466666666666667" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/drawable/back_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/drawable/book_placeholder.xml" value="0.19583333333333333" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/drawable/filter_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/drawable/search_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/layout/filter_toolbar.xml" value="0.4466666666666667" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/layout/search_toolbar.xml" value="0.4466666666666667" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/toolbars/layout/filter_toolbar.xml" value="0.1796875" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/toolbars/layout/search_toolbar.xml" value="0.15185185185185185" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-screen/filter/layout/fragment_filter.xml" value="0.3333333333333333" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-screen/filter/layout/parameter_item.xml" value="0.3333333333333333" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-screen/search/layout/fragment_search.xml" value="0.22" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res/layout/activity_main.xml" value="0.15185185185185185" />
       </map>
     </option>
   </component>
