@@ -1,16 +1,16 @@
 package ru.popkov.booksearch.di
 
-import android.content.Context
 import com.google.gson.Gson
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import org.koin.dsl.module
-import ru.popkov.data.net.retrofit.RetrofitFactory
-import ru.popkov.data.net.services.BookService
-import javax.inject.Singleton
+import ru.popkov.data.net.repository.BookRepository
+import ru.popkov.domain.net.BookNetRepository
 
 fun provideData() = module {
     single { Gson() }
+}
+
+private fun org.koin.core.module.Module.provideApartmentCardRepository() {
+    single<BookNetRepository> {
+        BookRepository(get())
+    }
 }

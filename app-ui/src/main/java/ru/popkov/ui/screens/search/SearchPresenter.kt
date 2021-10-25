@@ -10,7 +10,7 @@ import ru.popkov.ui.common.mvp.base.BasePresenter
 import ru.popkov.ui.navigation.Screens
 
 @InjectViewState
-class SearchPresenter() : BasePresenter<SearchView>() {
+class SearchPresenter : BasePresenter<SearchView>() {
 
     private val bookInteractor: BookInteractor by inject()
 
@@ -23,7 +23,6 @@ class SearchPresenter() : BasePresenter<SearchView>() {
         launchUI(handler) {
             val book = withIO { bookInteractor.getAllBooks("Доктор") }
             viewState.showBookList(book)
-            Log.d("efefe", book.first().toString())
         }
     }
 

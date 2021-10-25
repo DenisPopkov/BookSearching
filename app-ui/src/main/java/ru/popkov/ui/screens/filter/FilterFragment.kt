@@ -1,6 +1,7 @@
 package ru.popkov.ui.screens.filter
 
 import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_filter.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.popkov.ui.common.mvp.base.BaseFragment
