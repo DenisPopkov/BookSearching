@@ -1,12 +1,13 @@
 package ru.popkov.ui.screens.search
 
-import android.os.Bundle
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.popkov.domain.model.BookModel
 import ru.popkov.ui.common.mvp.base.BaseFragment
+import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
+import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 
 class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
@@ -24,7 +25,7 @@ class SearchFragment :
     private val apartmentTypesAdapter by lazy {
         SimpleAdapter(BookItemBinding::inflate,
             createViewHolder = {
-                ApartmentViewHolder(it, requireContext())
+                SearchViewHolder(it, requireContext())
             }, onClickCallback = { type, _ ->
                 presenter.navigateToArticle()
             }

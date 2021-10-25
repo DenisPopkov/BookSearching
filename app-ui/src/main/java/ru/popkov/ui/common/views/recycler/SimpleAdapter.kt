@@ -1,10 +1,11 @@
-package ru.popkov.ui.screens.search
+package ru.popkov.ui.common.views.recycler
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import ru.popkov.ui.screens.search.viewholder.SimpleViewHolder
 
 open class SimpleAdapter<T, VB : ViewBinding>(
     private val inflate: (LayoutInflater, ViewGroup?, Boolean) -> VB,

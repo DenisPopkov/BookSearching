@@ -1,12 +1,11 @@
-package ru.popkov.ui.screens.search
+package ru.popkov.ui.screens.search.viewholder
 
 import android.content.Context
 import com.bumptech.glide.Glide
 import ru.popkov.domain.model.BookModel
 import ru.popkov.ui.databinding.BookItemBinding
-import ru.popkov.ui.databinding.FragmentSearchBinding
 
-class ApartmentViewHolder(private val binding: BookItemBinding, private val context: Context) :
+class SearchViewHolder(private val binding: BookItemBinding, private val context: Context) :
     SimpleViewHolder<BookModel>(binding.root) {
 
     override fun bindTo(
