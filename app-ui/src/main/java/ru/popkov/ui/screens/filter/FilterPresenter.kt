@@ -1,18 +1,17 @@
-package ru.popkov.ui.common.main
+package ru.popkov.ui.screens.filter
 
 import moxy.InjectViewState
 import ru.popkov.ui.common.mvp.base.BasePresenter
 import ru.popkov.ui.navigation.Screens
 
 @InjectViewState
-class MainPresenter : BasePresenter<MainView>() {
+class FilterPresenter(val parameter: String) : BasePresenter<FilterView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        openScreens()
     }
 
-    private fun openScreens() {
-        router.newRootScreen(Screens.Search(""))
+    fun navigationToSearch() {
+        router.backTo(Screens.Search(parameter))
     }
 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.parameter_item.view.*
 import ru.popkov.ui.R
 
@@ -20,6 +21,15 @@ class FilterAdapter(val parameters: ArrayList<String>) : BaseAdapter() {
         val parameter = getItem(position)
         if (position == 0) rowView.check_icon.visibility = View.VISIBLE
         rowView.param.text = parameter
+        rowView.setOnClickListener {
+            when (position) {
+                0 -> rowView.check_icon.visibility
+                1 -> rowView.check_icon.visibility
+                2 -> rowView.check_icon.visibility
+                3 -> rowView.check_icon.visibility
+                4 -> rowView.check_icon.visibility
+            }
+        }
         return rowView
     }
 }

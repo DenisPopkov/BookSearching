@@ -9,6 +9,6 @@ import ru.popkov.domain.net.BookNetRepository
 class BookRepository(retrofit: Retrofit): BookNetRepository {
     private val service by lazy { retrofit.create(BookService::class.java) }
 
-    override suspend fun getAllBooks(q: String?): Deferred<List<BookModel>> =
+    override suspend fun getAllBooks(q: String?): List<BookModel> =
         service.getAllBooks(q)
 }

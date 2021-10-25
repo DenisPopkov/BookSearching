@@ -7,5 +7,5 @@ import ru.popkov.domain.model.BookModel
 
 interface BookService {
     @GET("volumes/")
-    suspend fun getAllBooks(@Query("q") q: String?): Deferred<List<BookModel>>
+    suspend fun getAllBooks(@Query("q") q: String?): List<BookModel>
 }

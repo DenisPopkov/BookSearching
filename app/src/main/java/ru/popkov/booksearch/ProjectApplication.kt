@@ -9,7 +9,6 @@ import ru.popkov.booksearch.di.provideData
 import ru.popkov.booksearch.di.provideDomain
 import ru.popkov.booksearch.di.provideUi
 
-
 class ProjectApplication : Application() {
     override fun onCreate() {
         super.onCreate()

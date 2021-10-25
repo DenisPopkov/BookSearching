@@ -9,9 +9,9 @@ import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 
-class SearchFragment :
+class SearchFragment(filterParameter: String) :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
-    SelectionApartmentTypeView {
+    SearchView {
 
     @InjectPresenter
     lateinit var presenter: SearchPresenter
@@ -26,18 +26,23 @@ class SearchFragment :
         SimpleAdapter(BookItemBinding::inflate,
             createViewHolder = {
                 SearchViewHolder(it, requireContext())
-            }, onClickCallback = { type, _ ->
-                presenter.navigateToArticle()
-            }
+            }, null
         )
     }
 
     override fun initViews() {
         initAdapters()
+        setListeners()
     }
 
-    override fun showApartmentTypesList(items: List<BookModel>) {
+    override fun showBookList(items: List<BookModel>) {
         apartmentTypesAdapter.swapItems(items)
+    }
+
+    private fun setListeners() {
+        binding.apply {
+            filterButton.setOnClickListener { presenter.navigationToFilter() }
+        }
     }
 
     override fun showNoInternetAlert() {

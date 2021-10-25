@@ -6,7 +6,7 @@ import ru.popkov.domain.net.BookNetRepository
 
 class BookInteractor(private val bookNetRepository: BookNetRepository): BookNetRepository {
 
-    override suspend fun getAllBooks(q: String?): Deferred<List<BookModel>> {
+    override suspend fun getAllBooks(q: String?): List<BookModel> {
         return bookNetRepository.getAllBooks(q)
     }
 }

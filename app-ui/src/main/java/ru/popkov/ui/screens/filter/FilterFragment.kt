@@ -1,34 +1,51 @@
 package ru.popkov.ui.screens.filter
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
-import ru.popkov.ui.R
-import ru.popkov.ui.databinding.ActivityMainBinding.inflate
+import android.widget.Toast
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
+import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.databinding.FragmentFilterBinding
 
-class FilterFragment : Fragment() {
+class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
+FilterView{
 
-    private lateinit var binding: FragmentFilterBinding
+    @InjectPresenter
+    lateinit var presenter: FilterPresenter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    @ProvidePresenter
+    fun providePresenter(): FilterPresenter {
 
-        binding = FragmentFilterBinding.inflate(inflater, container, false)
+        return FilterPresenter("")
+    }
 
+    private fun initAdapters() {
         val adapter = FilterAdapter(arrayListOf(
-                "Поиск по всему", "Поиск по автору",
-                "Поиск по названию", "Поиск по жанру",
-                "Поиск по издателю"))
+            "Поиск по всему", "Поиск по автору",
+            "Поиск по названию", "Поиск по жанру",
+            "Поиск по издателю"))
         binding.bookFilter.adapter = adapter
+    }
 
-        return binding.root
+    private fun setListeners() {
+        binding.apply {
+            backToSearch.setOnClickListener { presenter.navigationToSearch() }
+        }
+    }
+
+    override fun showNoInternetAlert() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showServerAlert() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showUnknownAlert(message: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun initViews() {
+        setListeners()
+        initAdapters()
     }
 }
