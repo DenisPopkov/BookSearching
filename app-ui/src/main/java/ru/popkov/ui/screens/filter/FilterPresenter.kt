@@ -5,13 +5,13 @@ import ru.popkov.ui.common.mvp.base.BasePresenter
 import ru.popkov.ui.navigation.Screens
 
 @InjectViewState
-class FilterPresenter(val parameter: String) : BasePresenter<FilterView>() {
+class FilterPresenter() : BasePresenter<FilterView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
     }
 
-    fun navigationToSearch() {
+    fun navigationToSearch(parameter: String) {
         router.backTo(Screens.Search(parameter))
     }
 }

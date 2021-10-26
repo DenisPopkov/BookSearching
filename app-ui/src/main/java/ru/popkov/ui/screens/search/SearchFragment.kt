@@ -10,7 +10,7 @@ import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 
-class SearchFragment(filterParameter: String) :
+class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
     SearchView {
 

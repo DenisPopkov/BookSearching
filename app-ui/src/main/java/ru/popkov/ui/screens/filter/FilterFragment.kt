@@ -1,13 +1,18 @@
 package ru.popkov.ui.screens.filter
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.popkov.ui.common.mvp.base.BaseFragment
+import ru.popkov.ui.common.storage.createPreferenceFilterFile
+import ru.popkov.ui.common.storage.getUserFilterParameter
 import ru.popkov.ui.databinding.FragmentFilterBinding
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
 FilterView{
+
+    init {
+        createPreferenceFilterFile(requireContext(), "all")
+    }
 
     @InjectPresenter
     lateinit var presenter: FilterPresenter
@@ -15,7 +20,7 @@ FilterView{
     @ProvidePresenter
     fun providePresenter(): FilterPresenter {
 
-        return FilterPresenter("")
+        return FilterPresenter()
     }
 
     private fun initAdapters() {
@@ -28,7 +33,7 @@ FilterView{
 
     private fun setListeners() {
         binding.apply {
-            backToSearch.setOnClickListener { presenter.navigationToSearch() }
+            backToSearch.setOnClickListener { presenter.navigationToSearch(getUserFilterParameter(requireContext())) }
         }
     }
 

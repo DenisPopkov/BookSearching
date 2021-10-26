@@ -1,9 +1,10 @@
 package ru.popkov.domain.interactors
 
+import ru.popkov.domain.interfaces.IBookInteractor
 import ru.popkov.domain.model.BookResponse
 import ru.popkov.domain.net.BookNetRepository
 
-class BookInteractor(private val bookNetRepository: BookNetRepository): BookNetRepository {
+class BookInteractor(private val bookNetRepository: BookNetRepository): IBookInteractor {
 
     override suspend fun getAllBooks(q: String?): BookResponse {
         return bookNetRepository.getAllBooks(q)
