@@ -1,12 +1,9 @@
 package ru.popkov.ui.screens.filter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Toast
-import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.parameter_item.view.*
 import ru.popkov.ui.R
 
@@ -21,16 +18,9 @@ class FilterAdapter(val parameters: ArrayList<String>) : BaseAdapter() {
     override fun getView(position: Int, p1: View?, parent: ViewGroup?): View {
         val rowView = LayoutInflater.from(parent?.context).inflate(R.layout.parameter_item, parent, false)
         val parameter = getItem(position)
-        rowView.param.text = parameter
+        if (position == 0) rowView.check_icon.visibility = View.VISIBLE
         rowView.parameter_container.setOnClickListener {
-            val whichOne = 0
-            when (whichOne) {
-                0 -> rowView.check_icon.visibility = View.INVISIBLE
-                1 -> rowView.check_icon.visibility = View.INVISIBLE
-                2 -> rowView.check_icon.visibility = View.INVISIBLE
-                3 -> rowView.check_icon.visibility = View.INVISIBLE
-                4 -> rowView.check_icon.visibility = View.INVISIBLE
-            }
+            rowView.check_icon.visibility = View.INVISIBLE
             when(position) {
                 0 -> rowView.check_icon.visibility = View.VISIBLE
                 1 -> rowView.check_icon.visibility = View.VISIBLE
@@ -39,6 +29,7 @@ class FilterAdapter(val parameters: ArrayList<String>) : BaseAdapter() {
                 4 -> rowView.check_icon.visibility = View.VISIBLE
             }
         }
+        rowView.param.text = parameter
         return rowView
     }
 }

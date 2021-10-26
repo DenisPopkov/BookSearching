@@ -3,6 +3,10 @@ package ru.popkov.data.net.retrofit
 import com.livetyping.pioneer.data.exceptions.*
 import okhttp3.Interceptor
 import okhttp3.Response
+import ru.popkov.data.exceptions.NotFoundException
+import ru.popkov.data.exceptions.ServerConflictErrorException
+import ru.popkov.data.exceptions.ServerErrorException
+import ru.popkov.data.exceptions.TooManyRequests
 
 class ServerErrorInterceptor : Interceptor {
 

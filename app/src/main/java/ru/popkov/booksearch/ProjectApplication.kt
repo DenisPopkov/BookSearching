@@ -8,6 +8,7 @@ import org.koin.core.logger.Level
 import ru.popkov.booksearch.di.provideData
 import ru.popkov.booksearch.di.provideDomain
 import ru.popkov.booksearch.di.provideUi
+import ru.popkov.ui.common.main.MainView
 
 class ProjectApplication : Application() {
     override fun onCreate() {

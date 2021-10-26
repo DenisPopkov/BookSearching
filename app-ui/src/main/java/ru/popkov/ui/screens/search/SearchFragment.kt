@@ -1,8 +1,9 @@
 package ru.popkov.ui.screens.search
 
+import kotlinx.android.synthetic.main.parameter_item.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import ru.popkov.domain.model.BookModel
+import ru.popkov.domain.model.Item
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
@@ -22,7 +23,7 @@ class SearchFragment(filterParameter: String) :
         return SearchPresenter()
     }
 
-    private val apartmentTypesAdapter by lazy {
+    private val bookAdapter by lazy {
         SimpleAdapter(BookItemBinding::inflate,
             createViewHolder = {
                 SearchViewHolder(it, requireContext())
@@ -35,8 +36,8 @@ class SearchFragment(filterParameter: String) :
         setListeners()
     }
 
-    override fun showBookList(items: List<BookModel>) {
-        apartmentTypesAdapter.swapItems(items)
+    override fun showBookList(book: List<Item>) {
+        bookAdapter.swapItems(listOf(book))
     }
 
     private fun setListeners() {
@@ -58,6 +59,6 @@ class SearchFragment(filterParameter: String) :
     }
 
     private fun initAdapters() {
-        binding.bookRecycler.adapter = apartmentTypesAdapter
+        binding.bookRecycler.adapter = bookAdapter
     }
 }
