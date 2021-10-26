@@ -10,10 +10,6 @@ import ru.popkov.ui.databinding.FragmentFilterBinding
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
 FilterView{
 
-    init {
-        createPreferenceFilterFile(requireContext(), "all")
-    }
-
     @InjectPresenter
     lateinit var presenter: FilterPresenter
 
