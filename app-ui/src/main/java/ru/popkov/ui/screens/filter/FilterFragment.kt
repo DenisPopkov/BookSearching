@@ -1,11 +1,13 @@
 package ru.popkov.ui.screens.filter
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.popkov.ui.common.mvp.base.BaseFragment
-import ru.popkov.ui.common.storage.createPreferenceFilterFile
-import ru.popkov.ui.common.storage.getUserFilterParameter
+import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.FragmentFilterBinding
+import ru.popkov.ui.databinding.ParameterItemBinding
+import ru.popkov.ui.navigation.Screens
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
 FilterView{
@@ -20,16 +22,15 @@ FilterView{
     }
 
     private fun initAdapters() {
-        val adapter = FilterAdapter(arrayListOf(
+        val adapter = arrayListOf(
             "Поиск по всему", "Поиск по автору",
             "Поиск по названию", "Поиск по жанру",
-            "Поиск по издателю"))
-        binding.bookFilter.adapter = adapter
-    }
+            "Поиск по издателю")
+        binding.bookFilter.layoutManager = LinearLayoutManager(requireContext())
+        binding.bookFilter.adapter = FilterResAdapter(adapter)
 
-    private fun setListeners() {
-        binding.apply {
-            backToSearch.setOnClickListener { presenter.navigationToSearch(getUserFilterParameter(requireContext())) }
+        binding.backToSearch.setOnClickListener {
+            presenter.navigationToSearch("word")
         }
     }
 
@@ -46,7 +47,6 @@ FilterView{
     }
 
     override fun initViews() {
-        setListeners()
         initAdapters()
     }
 }

@@ -4,25 +4,15 @@ import ru.popkov.domain.interfaces.IBookInteractor
 import ru.popkov.domain.model.BookResponse
 import ru.popkov.domain.net.BookNetRepository
 
-class BookInteractor(private val bookNetRepository: BookNetRepository): IBookInteractor {
+class BookInteractor(private val repository: BookNetRepository) {
 
-    override suspend fun getAllBooks(q: String?): BookResponse {
-        return bookNetRepository.getAllBooks(q)
-    }
+    suspend fun getAllBooks(q: String?) = repository.getAllBooks(q)
 
-    override suspend fun getBooksByAuthor(author: String): BookResponse {
-        return bookNetRepository.getBooksByAuthor(author)
-    }
+    suspend fun getBooksByAuthor(author: String) = repository.getBooksByAuthor(author)
 
-    override suspend fun getBooks(title: String): BookResponse {
-        return bookNetRepository.getBooks(title)
-    }
+    suspend fun getBooks(title: String) = repository.getBooks(title)
 
-    override suspend fun getBooksGenre(genre: String): BookResponse {
-        return bookNetRepository.getBooksGenre(genre)
-    }
+    suspend fun getBooksGenre(genre: String) = repository.getBooksGenre(genre)
 
-    override suspend fun getBooksPublisher(publisher: String): BookResponse {
-        return bookNetRepository.getBooksPublisher(publisher)
-    }
+    suspend fun getBooksPublisher(publisher: String) = repository.getBooksPublisher(publisher)
 }

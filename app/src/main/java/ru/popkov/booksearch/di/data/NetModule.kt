@@ -9,11 +9,9 @@ fun Module.provideNet() {
 }
 
 private fun Module.provideRepositories() {
-    provideApartmentCardRepository()
+    provideBookNetRepository()
 }
 
-private fun Module.provideApartmentCardRepository() {
-    single<BookNetRepository> {
-        BookRepository(get())
-    }
+private fun Module.provideBookNetRepository() {
+    single<BookNetRepository> { BookRepository(get()) }
 }

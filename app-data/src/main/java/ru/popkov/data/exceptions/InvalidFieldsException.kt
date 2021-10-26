@@ -1,4 +1,4 @@
-package com.livetyping.pioneer.data.exceptions
+package ru.popkov.data.exceptions
 
 import java.io.IOException
 

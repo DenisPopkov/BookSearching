@@ -18,6 +18,7 @@ class SearchViewHolder(private val binding: BookItemBinding, private val context
         with(binding) {
             Glide.with(context).load(item[pos].volumeInfo?.smallThumbnail).into(bookImage)
             bookTitle.text = item[pos].volumeInfo?.title
+            Log.d("efefe", item[pos].volumeInfo?.title.toString())
             author.text = item[pos].volumeInfo?.authors?.first()
         }
     }

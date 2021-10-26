@@ -44,7 +44,7 @@ dependencies {
     //Hilt
     implementation "com.google.dagger:hilt-android:$versions.hilt"
     kapt "com.google.dagger:hilt-compiler:$versions.hilt"
-    implementation "io.insert-koin:koin-android:${versions.koin}"
+    implementation "io.insert-koin:koin-android:$versions.koin"
 
     // Moxy
     implementation "com.github.moxy-community:moxy:$versions.moxyVersion"

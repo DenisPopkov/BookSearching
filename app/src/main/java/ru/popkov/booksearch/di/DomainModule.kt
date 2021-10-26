@@ -17,7 +17,7 @@ fun provideDomain() = module {
 }
 
 private fun org.koin.core.module.Module.provideInteractors() {
-    single<IBookInteractor> { BookInteractor(get()) }
+    single { BookInteractor(get()) }
 }
 
 private fun org.koin.core.module.Module.provideInterceptors() {

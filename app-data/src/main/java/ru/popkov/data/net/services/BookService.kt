@@ -1,6 +1,5 @@
 package ru.popkov.data.net.services
 
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -12,9 +11,9 @@ interface BookService {
     suspend fun getAllBooks(@Query("q") q: String?): BookResponse
 
     //Filter by author
-    @GET("volumes?q=inauthor:{author}")
+    @GET("volumes?q=inauthor?")
     suspend fun getBooksByAuthor(
-        @Path("author") author: String): BookResponse
+        @Query("author") author: String): BookResponse
 
     //Filter by name
     @GET("volumes?q={title}")
