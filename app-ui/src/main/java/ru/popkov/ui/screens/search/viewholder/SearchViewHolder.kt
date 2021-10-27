@@ -22,6 +22,7 @@ class SearchViewHolder(private val binding: BookItemBinding, private val context
             Glide.with(context)
                 .load(imgUrl)
                 .placeholder(R.drawable.book_placeholder)
+                .centerCrop()
                 .into(bookImage)
             bookTitle.text = item.volumeInfo?.title
             author.text = item.volumeInfo?.authors?.first()

@@ -4,25 +4,24 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import moxy.presenter.InjectPresenter
 import ru.popkov.domain.model.Item
+import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BaseFragment
+import ru.popkov.ui.common.storage.createPreferencesFile
+import ru.popkov.ui.common.storage.getFilterParameter
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 
-class SearchFragment(var parameter: String) :
+class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
     SearchView {
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Toast.makeText(requireContext(), parameter, Toast.LENGTH_SHORT).show()
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     @InjectPresenter
     lateinit var presenter: SearchPresenter
@@ -38,6 +37,10 @@ class SearchFragment(var parameter: String) :
         setListeners()
         binding.bookRecycler.adapter = bookAdapter
 
+        if (getFilterParameter(requireContext()).isNotEmpty()) {
+            binding.filterButton.setImageResource(R.drawable.filter_badge_icon)
+        }
+
         if (bookAdapter.items.isEmpty()) binding.emptyRequest.visibility = View.VISIBLE
     }
 
@@ -50,10 +53,14 @@ class SearchFragment(var parameter: String) :
         binding.apply {
             filterButton.setOnClickListener { presenter.navigationToFilter() }
         }
-        binding.clearButton.setOnClickListener { binding.userRequest.setText("") }
+        binding.clearButton.setOnClickListener {
+            binding.userRequest.setText("")
+            presenter.clearData()
+            binding.emptyRequest.visibility = View.VISIBLE
+        }
         binding.userRequest.setOnKeyListener { _, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                presenter.loadData(binding.userRequest.text.toString())
+                presenter.loadData(binding.userRequest.text.toString(), requireContext())
             }
             return@setOnKeyListener true
         }

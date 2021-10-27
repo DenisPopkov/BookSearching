@@ -1,5 +1,6 @@
 package ru.popkov.ui.screens.filter
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -8,6 +9,7 @@ import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.FragmentFilterBinding
 import ru.popkov.ui.databinding.ParameterItemBinding
 import ru.popkov.ui.navigation.Screens
+import ru.popkov.ui.screens.search.SearchFragment
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
 FilterView{
@@ -27,7 +29,7 @@ FilterView{
             "Поиск по названию", "Поиск по жанру",
             "Поиск по издателю")
         binding.bookFilter.layoutManager = LinearLayoutManager(requireContext())
-        binding.bookFilter.adapter = FilterResAdapter(adapter)
+        binding.bookFilter.adapter = FilterResAdapter(adapter, requireContext())
 
         binding.backToSearch.setOnClickListener {
             presenter.navigationToSearch("word")
