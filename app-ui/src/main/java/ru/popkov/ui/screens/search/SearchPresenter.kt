@@ -1,5 +1,6 @@
 package ru.popkov.ui.screens.search
 
+import android.util.Log
 import ru.popkov.domain.ext.launchUI
 import moxy.InjectViewState
 import org.koin.core.component.inject
@@ -14,7 +15,7 @@ import ru.popkov.ui.navigation.Screens
 class SearchPresenter : BasePresenter<SearchView>() {
 
     private val bookInteractor: BookInteractor by inject()
-    private var books: MutableList<Item> = mutableListOf()
+    private var books: MutableList<BookResponse> = mutableListOf()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -24,12 +25,8 @@ class SearchPresenter : BasePresenter<SearchView>() {
     private fun loadData() {
         launchUI {
             val book = withIO { bookInteractor.getBooksByAuthor("king") }
+            books.addAll(mutableListOf(book))
             viewState.showBookList(book.items!!)
-
-            if (book.items!!.isNotEmpty()) {
-                books.addAll(book.items!!)
-                viewState.showBookList(books)
-            }
         }
     }
 

@@ -23,6 +23,14 @@ open class SimpleAdapter<T, VB : ViewBinding>(
         notifyDataSetChanged()
     }
 
+    fun addItems(newItems: MutableList<T>) {
+        newItems.removeAll { items.contains(it) }
+        if (newItems == items || newItems.isEmpty()) return
+        val rangeStart = items.size
+        items.addAll(newItems)
+        notifyItemRangeInserted(rangeStart, newItems.size)
+    }
+
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleViewHolder<T> {

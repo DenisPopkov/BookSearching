@@ -16,11 +16,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/book_title"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:maxEms="80"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/book_image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="География. Начальный курс. 5 класс. рабочая тетрадь к учебнику И.И. Бариновой, …" />

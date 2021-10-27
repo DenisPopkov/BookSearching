@@ -1,12 +1,9 @@
 package ru.popkov.ui.screens.search
 
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import com.github.terrakok.cicerone.Cicerone
-import kotlinx.android.synthetic.main.parameter_item.*
+import android.util.Log
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import ru.popkov.domain.model.BookResponse
 import ru.popkov.domain.model.Item
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
@@ -22,35 +19,23 @@ class SearchFragment(var filterParameter: String) :
         var RE = 0
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Toast.makeText(requireContext(), filterParameter, Toast.LENGTH_SHORT).show()
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     @InjectPresenter
     lateinit var presenter: SearchPresenter
 
-    @ProvidePresenter
-    fun providePresenter(): SearchPresenter {
-
-        return SearchPresenter()
-    }
-
     private val bookAdapter by lazy {
         SimpleAdapter(BookItemBinding::inflate,
-            createViewHolder = {
-                SearchViewHolder(it, requireContext())
-            }, null
+            createViewHolder = { SearchViewHolder(it, requireContext()) },
+            onClickCallback = { item, _ -> presenter.navigationToFilter() }
         )
     }
 
     override fun initViews() {
-        initAdapters()
         setListeners()
+        binding.bookRecycler.adapter = bookAdapter
     }
 
-    override fun showBookList(book: List<Item>) {
-        bookAdapter.swapItems(listOf(book))
+    override fun showBookList(items: List<Item>) {
+        bookAdapter.addItems(mutableListOf(items))
     }
 
     private fun setListeners() {
@@ -69,9 +54,5 @@ class SearchFragment(var filterParameter: String) :
 
     override fun showUnknownAlert(message: String?) {
         TODO("Not yet implemented")
-    }
-
-    private fun initAdapters() {
-        binding.bookRecycler.adapter = bookAdapter
     }
 }
