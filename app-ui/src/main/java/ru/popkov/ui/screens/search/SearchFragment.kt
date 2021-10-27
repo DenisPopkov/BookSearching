@@ -37,7 +37,9 @@ class SearchFragment :
         setListeners()
         binding.bookRecycler.adapter = bookAdapter
 
-        if (getFilterParameter(requireContext()).isNotEmpty()) {
+        val filter = getFilterParameter(requireContext())
+
+        if (filter.isNotEmpty() && filter != "Поиск по всему") {
             binding.filterButton.setImageResource(R.drawable.filter_badge_icon)
         }
 

@@ -35,6 +35,7 @@ class FilterResAdapter(
             notifyDataSetChanged()
 
             val filter = when(position) {
+                0 -> parameters[position]
                 1 -> parameters[position]
                 2 -> parameters[position]
                 3 -> parameters[position]
