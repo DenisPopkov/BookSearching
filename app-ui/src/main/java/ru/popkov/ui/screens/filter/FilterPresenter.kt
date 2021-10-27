@@ -14,6 +14,5 @@ class FilterPresenter : BasePresenter<FilterView>() {
 
     fun navigationToSearch(parameter: String) {
         router.backTo(Screens.Search(parameter))
-        SearchFragment.RE = 1
     }
 }

@@ -1,9 +1,13 @@
 package ru.popkov.ui.screens.search
 
-import android.util.Log
+import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
-import ru.popkov.domain.model.BookResponse
 import ru.popkov.domain.model.Item
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
@@ -11,12 +15,13 @@ import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 
-class SearchFragment(var filterParameter: String) :
+class SearchFragment(var parameter: String) :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate),
     SearchView {
 
-    companion object {
-        var RE = 0
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Toast.makeText(requireContext(), parameter, Toast.LENGTH_SHORT).show()
+        super.onViewCreated(view, savedInstanceState)
     }
 
     @InjectPresenter
@@ -32,15 +37,32 @@ class SearchFragment(var filterParameter: String) :
     override fun initViews() {
         setListeners()
         binding.bookRecycler.adapter = bookAdapter
+
+        if (bookAdapter.items.isEmpty()) binding.emptyRequest.visibility = View.VISIBLE
     }
 
     override fun showBookList(items: List<Item>) {
-        bookAdapter.addItems(mutableListOf(items))
+        bookAdapter.swapItems(items.toMutableList())
+        if (items.isNotEmpty()) binding.emptyRequest.visibility = View.GONE
     }
 
     private fun setListeners() {
         binding.apply {
             filterButton.setOnClickListener { presenter.navigationToFilter() }
+        }
+        binding.clearButton.setOnClickListener { binding.userRequest.setText("") }
+        binding.userRequest.setOnKeyListener { _, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                presenter.loadData(binding.userRequest.text.toString())
+            }
+            return@setOnKeyListener true
+        }
+        binding.userRequest.addTextChangedListener {
+            if (it.toString().isEmpty()) {
+                binding.clearButton.visibility = View.INVISIBLE
+            } else {
+                binding.clearButton.visibility = View.VISIBLE
+            }
         }
     }
 

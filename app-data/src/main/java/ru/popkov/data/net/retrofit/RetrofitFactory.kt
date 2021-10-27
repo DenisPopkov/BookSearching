@@ -14,7 +14,7 @@ class RetrofitFactory {
     companion object {
         private const val SOCKET_TIMEOUT_EXCEPTION_IN_SECONDS: Long = 60
         private const val DISK_CACHE_SIZE_IN_BYTES: Long = 50 * 1024 * 1024
-        private const val CACHE_CHILD_PATH_NAME = "http"
+        private const val CACHE_CHILD_PATH_NAME = "https"
 
         fun create(context: Context, baseUrl: String, vararg interceptors: Interceptor): Retrofit {
             val okHttpClient = createOkHttpClient(context, *interceptors)
