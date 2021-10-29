@@ -6,7 +6,6 @@ import ru.popkov.data.net.retrofit.LoggingInterceptorFactory
 import ru.popkov.data.net.retrofit.RetrofitFactory
 import ru.popkov.data.net.retrofit.ServerErrorInterceptor
 import ru.popkov.domain.interactors.BookInteractor
-import ru.popkov.domain.interfaces.IBookInteractor
 
 private const val BASE_URL = "https://www.googleapis.com/books/v1/"
 

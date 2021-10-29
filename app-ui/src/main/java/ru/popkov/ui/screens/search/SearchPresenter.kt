@@ -7,7 +7,7 @@ import org.koin.core.component.inject
 import ru.popkov.domain.ext.withIO
 import ru.popkov.domain.interactors.BookInteractor
 import ru.popkov.domain.model.BookResponse
-import ru.popkov.domain.model.Item
+import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BasePresenter
 import ru.popkov.ui.common.storage.getFilterParameter
 import ru.popkov.ui.navigation.Screens
@@ -23,16 +23,16 @@ class SearchPresenter : BasePresenter<SearchView>() {
         launchUI {
             val book = withIO {
                 when (filter) {
-                    "Поиск по всему" -> bookInteractor.getAllBooks(request)
-                    "Поиск по автору" -> bookInteractor.getBooksByAuthor(request)
-                    "Поиск по названию" -> bookInteractor.getBooks(request)
-                    "Поиск по жанру" -> bookInteractor.getBooksGenre(request)
-                    "Поиск по издателю" -> bookInteractor.getBooksPublisher(request)
-                    else -> bookInteractor.getAllBooks(request)
+                    context.resources.getString(R.string.all_search) -> bookInteractor.getBooks(request)
+                    context.resources.getString(R.string.by_author) -> bookInteractor.getBooks("inauthor:$request")
+                    context.resources.getString(R.string.by_title) -> bookInteractor.getBooks("intitle:$request")
+                    context.resources.getString(R.string.by_genre) -> bookInteractor.getBooks("subject:$request")
+                    context.resources.getString(R.string.by_publisher) -> bookInteractor.getBooks("inpublisher:$request")
+                    else -> bookInteractor.getBooks("inauthor:$request")
                 }
             }
             books.addAll(mutableListOf(book))
-            viewState.showBookList(book.items!!)
+            viewState.showBookList(book.items ?: emptyList())
         }
     }
 

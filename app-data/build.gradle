@@ -13,16 +13,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
 
+    //Koin
     implementation "io.insert-koin:koin-android:${versions.koin}"
 
     // Gson
     implementation "com.google.code.gson:gson:$versions.gson"
-
-    implementation("io.coil-kt:coil:1.4.0")
-
-    //Glide
-    implementation "com.github.bumptech.glide:glide:$versions.glide"
-    kapt "com.github.bumptech.glide:compiler:$versions.glide"
 
     // WorkManager
     implementation 'androidx.work:work-runtime-ktx:2.7.0'

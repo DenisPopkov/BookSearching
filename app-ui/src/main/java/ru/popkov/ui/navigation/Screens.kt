@@ -8,5 +8,5 @@ import ru.popkov.ui.screens.search.SearchFragment
 object Screens {
 
     fun Filter() = FragmentScreen { FilterFragment() }
-    fun Search(filter: String) = FragmentScreen { SearchFragment() }
+    fun Search() = FragmentScreen { SearchFragment() }
 }

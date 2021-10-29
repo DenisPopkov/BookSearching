@@ -8,7 +8,7 @@ import ru.popkov.ui.screens.search.SearchFragment
 @InjectViewState
 class FilterPresenter : BasePresenter<FilterView>() {
 
-    fun navigationToSearch(parameter: String) {
-        router.backTo(Screens.Search(parameter))
+    fun navigationToSearch() {
+        router.exit()
     }
 }

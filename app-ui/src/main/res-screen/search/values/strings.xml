@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="book_state">Нужная книга всегда найдётся</string>
+    <string name="all_search">Поиск по всему</string>
+    <string name="by_author">Поиск по автору</string>
+    <string name="by_title">Поиск по названию</string>
+    <string name="by_genre">Поиск по жанру</string>
+    <string name="by_publisher">Поиск по издателю</string>
 </resources>

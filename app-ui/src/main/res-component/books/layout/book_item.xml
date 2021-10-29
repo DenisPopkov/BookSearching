@@ -38,4 +38,16 @@
         app:layout_constraintTop_toBottomOf="@+id/book_title"
         tools:text="Сонин Николай Иванович" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#14212121"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/book_image"
+        app:layout_constraintTop_toBottomOf="@+id/book_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

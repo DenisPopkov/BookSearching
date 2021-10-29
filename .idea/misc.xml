@@ -11,8 +11,10 @@
         <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/drawable/search_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/layout/filter_toolbar.xml" value="0.4466666666666667" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-component/search-toolbar/layout/search_toolbar.xml" value="0.4466666666666667" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/toolbars/drawable/ic_launcher_foreground.xml" value="0.19583333333333333" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-component/toolbars/layout/filter_toolbar.xml" value="0.1796875" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-component/toolbars/layout/search_toolbar.xml" value="0.15185185185185185" />
+        <entry key="..\:/BookSearch/app-ui/src/main/res-component/toolbars/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19583333333333333" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-screen/filter/layout/fragment_filter.xml" value="0.3333333333333333" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-screen/filter/layout/parameter_item.xml" value="0.4466666666666667" />
         <entry key="..\:/BookSearch/app-ui/src/main/res-screen/search/layout/fragment_search.xml" value="0.3333333333333333" />

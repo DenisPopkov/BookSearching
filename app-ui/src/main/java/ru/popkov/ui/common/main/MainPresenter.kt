@@ -13,6 +13,6 @@ class MainPresenter : BasePresenter<MainView>() {
     }
 
     private fun openScreens() {
-        router.newRootScreen(Screens.Search(""))
+        router.newRootScreen(Screens.Search())
     }
 }

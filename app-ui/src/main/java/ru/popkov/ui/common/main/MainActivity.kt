@@ -24,14 +24,14 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showNoInternetAlert() {
-        TODO("Not yet implemented")
+        //do nothing
     }
 
     override fun showServerAlert() {
-        TODO("Not yet implemented")
+        //do nothing
     }
 
     override fun showUnknownAlert(message: String?) {
-        TODO("Not yet implemented")
+        //do nothing
     }
 }
