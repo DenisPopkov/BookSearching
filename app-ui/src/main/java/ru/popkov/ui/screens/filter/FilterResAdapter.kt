@@ -48,7 +48,7 @@ class FilterResAdapter(
         holder.itemView.check_icon.isInvisible = rawIndex != position
     }
 
-    override fun getItemCount() = parameters.size
+    override fun getItemCount() = 5
 }
 
 class FilterViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)

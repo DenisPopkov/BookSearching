@@ -20,7 +20,7 @@ class SearchPresenter : BasePresenter<SearchView>() {
     private val filters: IPreference by inject()
 
     fun loadData(request: String, context: Context) {
-        val filter = filters.getFilterParameter("").toString()
+        val filter = filters.getFilterParameter().toString()
         launchUI {
             val book = withIO {
                 when (filter) {

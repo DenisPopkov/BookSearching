@@ -9,6 +9,9 @@ class BookRepository(retrofit: Retrofit) : BookNetRepository {
     private val service by lazy { retrofit.create(BookService::class.java) }
 
     override suspend fun getBooks(
-        query: String
-    ): BookResponse = service.getBooks(query)
+        query: String,
+    ): BookResponse {
+
+        return service.getBooks(query)
+    }
 }

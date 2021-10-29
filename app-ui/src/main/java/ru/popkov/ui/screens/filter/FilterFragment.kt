@@ -1,5 +1,6 @@
 package ru.popkov.ui.screens.filter
 
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -24,7 +25,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     }
 
     private fun initAdapters() {
-        val filter = filters.getFilterParameter("").toString()
+        val filter = filters.getFilterParameter().toString()
         val adapter = mutableMapOf(
             resources.getString(R.string.all_search) to 0, resources.getString(R.string.by_author) to 0,
             resources.getString(R.string.by_title) to 0, resources.getString(R.string.by_genre) to 0,

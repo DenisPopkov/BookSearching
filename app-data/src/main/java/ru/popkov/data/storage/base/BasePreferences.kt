@@ -6,6 +6,6 @@ abstract class BasePreferences(
     private val preferences: SharedPreferences,
     private val key: String
 ) {
-    fun getValue(defaultValue: String) = preferences.getString(key, defaultValue)
+    fun getValue() = preferences.getString(key, "")
     fun set(value: String) = preferences.edit().putString(key, value).apply()
 }
