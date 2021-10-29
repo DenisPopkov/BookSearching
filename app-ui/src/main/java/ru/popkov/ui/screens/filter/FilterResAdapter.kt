@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.book_item.view.*
 import kotlinx.android.synthetic.main.fragment_filter.view.*
 import kotlinx.android.synthetic.main.parameter_item.view.*
+import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.R
-import ru.popkov.ui.common.storage.createPreferencesFile
 
 class FilterResAdapter(
     private val parameters: MutableMap<String, Int>,
-    private val context: Context): RecyclerView.Adapter<FilterViewHolder>() {
+    private val filters: IPreference): RecyclerView.Adapter<FilterViewHolder>() {
 
     private var rawIndex = 0
     private var check = 0
@@ -42,7 +42,7 @@ class FilterResAdapter(
             rawIndex = position
             holder.itemView.check_icon.isInvisible = rawIndex != position
             notifyDataSetChanged()
-            createPreferencesFile(context, filter)
+            filters.createPreferencesFile(filter)
         }
 
         holder.itemView.check_icon.isInvisible = rawIndex != position

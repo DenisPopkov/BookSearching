@@ -1,15 +1,15 @@
 package ru.popkov.ui.screens.search
 
 import android.content.Context
-import ru.popkov.domain.ext.launchUI
 import moxy.InjectViewState
 import org.koin.core.component.inject
+import ru.popkov.domain.ext.launchUI
 import ru.popkov.domain.ext.withIO
 import ru.popkov.domain.interactors.BookInteractor
 import ru.popkov.domain.model.BookResponse
+import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BasePresenter
-import ru.popkov.ui.common.storage.getFilterParameter
 import ru.popkov.ui.navigation.Screens
 
 @InjectViewState
@@ -17,9 +17,10 @@ class SearchPresenter : BasePresenter<SearchView>() {
 
     private val bookInteractor: BookInteractor by inject()
     private var books: MutableList<BookResponse> = mutableListOf()
+    private val filters: IPreference by inject()
 
     fun loadData(request: String, context: Context) {
-        val filter = getFilterParameter(context)
+        val filter = filters.getFilterParameter("").toString()
         launchUI {
             val book = withIO {
                 when (filter) {

@@ -8,10 +8,11 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import moxy.presenter.InjectPresenter
+import org.koin.android.ext.android.inject
 import ru.popkov.domain.model.Item
+import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BaseFragment
-import ru.popkov.ui.common.storage.getFilterParameter
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
@@ -25,6 +26,8 @@ class SearchFragment :
     @InjectPresenter
     lateinit var presenter: SearchPresenter
 
+    private val filters: IPreference by inject()
+
     private val bookAdapter by lazy {
         SimpleAdapter(BookItemBinding::inflate,
             createViewHolder = { SearchViewHolder(it, requireContext()) },
@@ -36,7 +39,7 @@ class SearchFragment :
         setListeners()
         binding.bookRecycler.adapter = bookAdapter
 
-        val filter = getFilterParameter(requireContext())
+        val filter = filters.getFilterParameter("").toString()
 
         if (filter.isNotEmpty() && filter != "Поиск по всему") {
             binding.filterButton.setImageResource(R.drawable.filter_badge_icon)

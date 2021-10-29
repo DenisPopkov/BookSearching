@@ -1,6 +1,6 @@
 package ru.popkov.domain.storage
 
-interface PreferencesFilter {
+interface IPreference {
 
     fun createPreferencesFile(filter: String)
     fun getFilterParameter(filter: String): String?

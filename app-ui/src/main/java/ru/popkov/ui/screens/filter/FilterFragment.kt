@@ -3,9 +3,10 @@ package ru.popkov.ui.screens.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import org.koin.android.ext.android.inject
+import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BaseFragment
-import ru.popkov.ui.common.storage.getFilterParameter
 import ru.popkov.ui.databinding.FragmentFilterBinding
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
@@ -14,6 +15,8 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     @InjectPresenter
     lateinit var presenter: FilterPresenter
 
+    private val filters: IPreference by inject()
+
     @ProvidePresenter
     fun providePresenter(): FilterPresenter {
 
@@ -21,7 +24,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     }
 
     private fun initAdapters() {
-        val filter = getFilterParameter(requireContext())
+        val filter = filters.getFilterParameter("").toString()
         val adapter = mutableMapOf(
             resources.getString(R.string.all_search) to 0, resources.getString(R.string.by_author) to 0,
             resources.getString(R.string.by_title) to 0, resources.getString(R.string.by_genre) to 0,
@@ -37,7 +40,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
         }
         adapter[filter] = pos
         binding.bookFilter.layoutManager = LinearLayoutManager(requireContext())
-        binding.bookFilter.adapter = FilterResAdapter(adapter, requireContext())
+        binding.bookFilter.adapter = FilterResAdapter(adapter, filters)
 
         binding.backToSearch.setOnClickListener {
             presenter.navigationToSearch()
