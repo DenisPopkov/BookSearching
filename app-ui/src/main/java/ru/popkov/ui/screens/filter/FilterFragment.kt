@@ -1,14 +1,15 @@
 package ru.popkov.ui.screens.filter
 
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import org.koin.android.ext.android.inject
 import ru.popkov.domain.storage.IPreference
-import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.databinding.FragmentFilterBinding
+import ru.popkov.ui.model.FilterModel
+import ru.popkov.ui.screens.filter.viewholder.FilterResAdapter
+import ru.popkov.ui.utils.Filters
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
     FilterView {
@@ -26,20 +27,24 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
 
     private fun initAdapters() {
         val filter = filters.getFilterParameter().toString()
-        val adapter = mutableMapOf(
-            resources.getString(R.string.all_search) to 0, resources.getString(R.string.by_author) to 0,
-            resources.getString(R.string.by_title) to 0, resources.getString(R.string.by_genre) to 0,
-            resources.getString(R.string.by_publisher) to 0
-        )
-        val pos = when(filter) {
-            resources.getString(R.string.all_search) -> 0
-            resources.getString(R.string.by_author) -> 1
-            resources.getString(R.string.by_title) -> 2
-            resources.getString(R.string.by_genre) -> 3
-            resources.getString(R.string.by_publisher) -> 4
-            else -> 0
+
+        val whichChecked = when(filter) {
+            getString(Filters.ALL.res) -> true
+            getString(Filters.ALL.res) -> true
+            getString(Filters.TITLE.res) -> true
+            getString(Filters.GENRE.res) -> true
+            getString(Filters.PUBLISHER.res) -> true
+            else -> false
         }
-        adapter[filter] = pos
+
+        val adapter = mutableListOf(
+            FilterModel(getString(Filters.ALL.res), whichChecked),
+            FilterModel(getString(Filters.AUTHOR.res), whichChecked),
+            FilterModel(getString(Filters.TITLE.res), whichChecked),
+            FilterModel(getString(Filters.GENRE.res), whichChecked),
+            FilterModel(getString(Filters.PUBLISHER.res), whichChecked)
+        )
+
         binding.bookFilter.layoutManager = LinearLayoutManager(requireContext())
         binding.bookFilter.adapter = FilterResAdapter(adapter, filters)
 
