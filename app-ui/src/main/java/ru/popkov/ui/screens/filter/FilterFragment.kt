@@ -2,13 +2,11 @@ package ru.popkov.ui.screens.filter
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 import org.koin.android.ext.android.inject
 import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.databinding.FragmentFilterBinding
 import ru.popkov.ui.model.FilterModel
-import ru.popkov.ui.screens.filter.viewholder.FilterResAdapter
 import ru.popkov.ui.utils.Filters
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
@@ -19,22 +17,15 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
 
     private val filters: IPreference by inject()
 
-    @ProvidePresenter
-    fun providePresenter(): FilterPresenter {
-
-        return FilterPresenter()
-    }
-
     private fun initAdapters() {
         val filter = filters.getFilterParameter().toString()
 
         val whichChecked = when(filter) {
-            getString(Filters.ALL.res) -> true
-            getString(Filters.ALL.res) -> true
-            getString(Filters.TITLE.res) -> true
-            getString(Filters.GENRE.res) -> true
-            getString(Filters.PUBLISHER.res) -> true
-            else -> false
+            getString(Filters.AUTHOR.res) -> 1
+            getString(Filters.TITLE.res) -> 2
+            getString(Filters.GENRE.res) -> 3
+            getString(Filters.PUBLISHER.res) -> 4
+            else -> 0
         }
 
         val adapter = mutableListOf(
