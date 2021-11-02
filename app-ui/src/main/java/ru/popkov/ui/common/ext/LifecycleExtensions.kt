@@ -15,7 +15,7 @@ import kotlin.reflect.KProperty
 @FlowPreview
 @ExperimentalCoroutinesApi
 fun TextInputEditText.createUserRequestWithDelay(): Flow<Unit> = callbackFlow {
-     addTextChangedListener {
+    addTextChangedListener {
         trySend(Unit)
     }
     awaitClose { setOnClickListener(null) }

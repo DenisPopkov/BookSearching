@@ -5,8 +5,11 @@ import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
 import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.common.mvp.base.BaseFragment
+import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.FragmentFilterBinding
+import ru.popkov.ui.databinding.ParameterItemBinding
 import ru.popkov.ui.model.FilterModel
+import ru.popkov.ui.screens.filter.viewholder.FilterViewHolder
 import ru.popkov.ui.utils.Filters
 
 class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding::inflate),
@@ -15,11 +18,18 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     @InjectPresenter
     lateinit var presenter: FilterPresenter
 
-    private val filters: IPreference by inject()
+    private val filtersPreferences: IPreference by inject()
 
-    private fun initAdapters() {
+    private val filterAdapter by lazy {
+        SimpleAdapter(
+            ParameterItemBinding::inflate,
+            createViewHolder = { FilterViewHolder(it, filtersPreferences) },
+            onClickCallback = { item, pos -> updateFilterAdapter() }
+        )
+    }
 
-        val whichChecked = when(filters.getFilterParameter().toString()) {
+    private fun createFilterAdapter(): MutableList<FilterModel> {
+        val whichChecked = when(filtersPreferences.getFilterParameter().toString()) {
             getString(Filters.AUTHOR.res) -> 1
             getString(Filters.TITLE.res) -> 2
             getString(Filters.GENRE.res) -> 3
@@ -27,16 +37,25 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
             else -> 0
         }
 
-        val adapter = mutableListOf(
+        return mutableListOf(
             FilterModel(getString(Filters.ALL.res), whichChecked),
             FilterModel(getString(Filters.AUTHOR.res), whichChecked),
             FilterModel(getString(Filters.TITLE.res), whichChecked),
             FilterModel(getString(Filters.GENRE.res), whichChecked),
             FilterModel(getString(Filters.PUBLISHER.res), whichChecked)
         )
+    }
+
+    private fun updateFilterAdapter() {
+        filterAdapter.updateData()
+    }
+
+    private fun initAdapters() {
+
+        filterAdapter.swapItems(createFilterAdapter())
 
         binding.filterBook.layoutManager = LinearLayoutManager(requireContext())
-        binding.filterBook.adapter = FilterResAdapter(adapter, filters)
+        binding.filterBook.adapter = filterAdapter
 
         binding.backToSearchScreen.setOnClickListener {
             presenter.navigationToSearch()

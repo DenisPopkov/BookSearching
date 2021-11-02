@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import ru.popkov.ui.common.ext.indexOfOrNull
 
 open class SimpleAdapter<T, VB : ViewBinding>(
     private val inflate: (LayoutInflater, ViewGroup?, Boolean) -> VB,
@@ -19,6 +20,10 @@ open class SimpleAdapter<T, VB : ViewBinding>(
         if (newItems == items) return
         items.clear()
         items.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
+    fun updateData() {
         notifyDataSetChanged()
     }
 

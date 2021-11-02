@@ -6,14 +6,12 @@ import androidx.core.view.isInvisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
 import ru.popkov.domain.model.Item
@@ -74,21 +72,24 @@ class SearchFragment :
         }
     }
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     private fun setListeners() {
         binding.apply {
             filterButton.setOnClickListener { presenter.navigationToFilter() }
         }
+
         binding.clearButton.setOnClickListener {
             binding.searchUserField.setText("")
             clearScreen()
         }
+
         binding.searchUserField.setOnKeyListener { _, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 createRequest()
             }
             return@setOnKeyListener true
         }
-
 
         binding.searchUserField.createUserRequestWithDelay().debounce(1500).onEach {
             createRequest()
