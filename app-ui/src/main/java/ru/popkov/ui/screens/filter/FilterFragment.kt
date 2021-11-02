@@ -1,5 +1,6 @@
 package ru.popkov.ui.screens.filter
 
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
@@ -23,8 +24,11 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     private val filterAdapter by lazy {
         SimpleAdapter(
             ParameterItemBinding::inflate,
-            createViewHolder = { FilterViewHolder(it, filtersPreferences) },
-            onClickCallback = { item, pos -> updateFilterAdapter() }
+            createViewHolder = { FilterViewHolder(it) },
+            onClickCallback = { item, _ ->
+                filtersPreferences.createPreferencesFile(item.parameter)
+                initAdapters()
+            }
         )
     }
 
@@ -47,22 +51,23 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     }
 
     private fun updateFilterAdapter() {
-        filterAdapter.updateData()
+        filterAdapter.swapItems(createFilterAdapter())
     }
 
-    private fun initAdapters() {
-
-        filterAdapter.swapItems(createFilterAdapter())
-
-        binding.filterBook.layoutManager = LinearLayoutManager(requireContext())
-        binding.filterBook.adapter = filterAdapter
-
+    private fun initListeners() {
         binding.backToSearchScreen.setOnClickListener {
             presenter.navigationToSearch()
         }
     }
 
+    private fun initAdapters() {
+        updateFilterAdapter()
+        binding.filterBook.layoutManager = LinearLayoutManager(requireContext())
+        binding.filterBook.adapter = filterAdapter
+    }
+
     override fun initViews() {
         initAdapters()
+        initListeners()
     }
 }

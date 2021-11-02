@@ -23,10 +23,6 @@ open class SimpleAdapter<T, VB : ViewBinding>(
         notifyDataSetChanged()
     }
 
-    fun updateData() {
-        notifyDataSetChanged()
-    }
-
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleViewHolder<T> {
