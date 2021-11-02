@@ -1,6 +1,5 @@
 package ru.popkov.ui.screens.filter
 
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject

@@ -11,7 +11,7 @@ class FilterViewHolder(
 ) :
     SimpleViewHolder<FilterModel>(binding.root) {
 
-    private var rawIndex = 0
+    private var previousPosition = 0
 
     override fun bindTo(
         item: FilterModel,
@@ -19,17 +19,17 @@ class FilterViewHolder(
         onClickCallback: ((FilterModel, Int) -> Unit)?
     ) {
 
-        rawIndex = item.filterCheck
+        previousPosition = item.filterCheck
 
         with(binding) {
             filterItemName.text = item.parameter
 
             parameterContainer.setOnClickListener {
                 onClickCallback?.invoke(item, pos)
-                rawIndex = pos
+                previousPosition = pos
             }
 
-            filterItemCheck.isInvisible = rawIndex != pos
+            filterItemCheck.isInvisible = previousPosition != pos
         }
     }
 }
