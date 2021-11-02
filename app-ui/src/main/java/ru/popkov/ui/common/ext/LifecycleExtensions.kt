@@ -1,11 +1,26 @@
 package ru.popkov.ui.common.ext
 
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-//https://gist.github.com/serhii-pokrovskyi/f9908ed6cb167a4572eff1c1f08e461bStringExt.kt
+@FlowPreview
+@ExperimentalCoroutinesApi
+fun TextInputEditText.createUserRequestWithDelay(): Flow<Unit> = callbackFlow {
+     addTextChangedListener {
+        trySend(Unit)
+    }
+    awaitClose { setOnClickListener(null) }
+}
+
 fun <T> LifecycleOwner.onDestroyNullable(): ReadWriteProperty<LifecycleOwner, T> =
     object : ReadWriteProperty<LifecycleOwner, T>, DefaultLifecycleObserver {
 

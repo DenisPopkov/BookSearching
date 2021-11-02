@@ -18,9 +18,8 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
     private val filters: IPreference by inject()
 
     private fun initAdapters() {
-        val filter = filters.getFilterParameter().toString()
 
-        val whichChecked = when(filter) {
+        val whichChecked = when(filters.getFilterParameter().toString()) {
             getString(Filters.AUTHOR.res) -> 1
             getString(Filters.TITLE.res) -> 2
             getString(Filters.GENRE.res) -> 3
@@ -42,18 +41,6 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
         binding.backToSearch.setOnClickListener {
             presenter.navigationToSearch()
         }
-    }
-
-    override fun showNoInternetAlert() {
-        //do nothing
-    }
-
-    override fun showServerAlert() {
-        //do nothing
-    }
-
-    override fun showUnknownAlert(message: String?) {
-        //do nothing
     }
 
     override fun initViews() {

@@ -22,16 +22,4 @@ class MainActivity : BaseActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
-    override fun showNoInternetAlert() {
-        //do nothing
-    }
-
-    override fun showServerAlert() {
-        //do nothing
-    }
-
-    override fun showUnknownAlert(message: String?) {
-        //do nothing
-    }
 }

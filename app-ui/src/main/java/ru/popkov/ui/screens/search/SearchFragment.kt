@@ -2,16 +2,24 @@ package ru.popkov.ui.screens.search
 
 import android.view.KeyEvent
 import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
 import ru.popkov.domain.model.Item
 import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.R
+import ru.popkov.ui.common.ext.createUserRequestWithDelay
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
@@ -81,28 +89,10 @@ class SearchFragment :
             return@setOnKeyListener true
         }
 
-            binding.userRequest.addTextChangedListener {
-                CoroutineScope(Main).launch {
-                    delay(1500)
-                    createRequest()
-                    if (it.toString().isEmpty()) {
-                        binding.clearButton.visibility = View.INVISIBLE
-                    } else {
-                        binding.clearButton.visibility = View.VISIBLE
-                    }
-                }
-            }
-    }
 
-    override fun showNoInternetAlert() {
-        //do nothing
-    }
-
-    override fun showServerAlert() {
-        //do nothing
-    }
-
-    override fun showUnknownAlert(message: String?) {
-        //do nothing
+        binding.userRequest.createUserRequestWithDelay().debounce(1500).onEach {
+            createRequest()
+            binding.clearButton.isInvisible = it.toString().isEmpty()
+        }.launchIn(lifecycleScope)
     }
 }

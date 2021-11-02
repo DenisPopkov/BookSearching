@@ -1,4 +1,4 @@
-package ru.popkov.ui.screens.search.viewholder
+package ru.popkov.ui.common.views.recycler
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

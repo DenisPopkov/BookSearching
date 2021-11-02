@@ -13,6 +13,5 @@ fun Module.providePrefs() {
 
 fun Module.providePreferencesRepository() {
     single { FilterPreferences(get()) }
-
     single<PreferencesFilter> { FilterPreferencesRepository(get()) }
 }
