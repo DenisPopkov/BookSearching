@@ -25,6 +25,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
 
     override fun updateFilterAdapter(data: List<FilterModel>) {
         filterAdapter.swapItems(data)
+        binding.filterBook.adapter = filterAdapter
     }
 
     override fun initViews() {

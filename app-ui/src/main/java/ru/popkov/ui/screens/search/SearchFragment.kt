@@ -20,6 +20,7 @@ import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 import ru.popkov.ui.model.Filters
+import timber.log.Timber
 import java.util.*
 
 class SearchFragment :
@@ -34,7 +35,7 @@ class SearchFragment :
     private val bookAdapter by lazy {
         SimpleAdapter(BookItemBinding::inflate,
             createViewHolder = { SearchViewHolder(it, requireContext()) },
-            onClickCallback = { item, _ -> presenter.navigationToFilter() }
+            onClickCallback = null
         )
     }
 
@@ -56,41 +57,29 @@ class SearchFragment :
         if (items.isNotEmpty()) binding.emptyRequest.visibility = View.GONE
     }
 
-    private fun clearScreen() {
-        presenter.clearData()
-        binding.emptyRequest.visibility = View.VISIBLE
-    }
-
-    private fun createRequest() {
-        if (binding.searchUserField.text.toString().isNotEmpty()) {
-            presenter.loadData(binding.searchUserField.text.toString())
-        } else {
-            clearScreen()
-        }
-    }
-
     @ExperimentalCoroutinesApi
     @FlowPreview
     private fun initListeners() {
-        binding.apply {
-            filterButton.setOnClickListener { presenter.navigationToFilter() }
-        }
+
+        binding.filterButton.setOnClickListener { presenter.navigationToFilter() }
 
         binding.clearButton.setOnClickListener {
             binding.searchUserField.setText("")
-            clearScreen()
+            presenter.clearData()
+            binding.emptyRequest.visibility = View.VISIBLE
         }
 
         binding.searchUserField.setOnKeyListener { _, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                createRequest()
+                presenter.createRequest(binding.searchUserField.text.toString())
             }
             return@setOnKeyListener true
         }
 
         binding.searchUserField.createUserRequestWithDelay().debounce(1500).onEach {
-            createRequest()
-            binding.clearButton.isInvisible = it.toString().isEmpty()
+            val currentUserBookRequest = binding.searchUserField.text.toString()
+            presenter.createRequest(currentUserBookRequest)
+            binding.clearButton.isInvisible = currentUserBookRequest.isEmpty()
         }.launchIn(lifecycleScope)
     }
 }

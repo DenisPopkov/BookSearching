@@ -18,12 +18,11 @@ class FilterViewHolder(
         with(binding) {
             val context = filterItemName.context
             filterItemName.text = context.getString(item.parameter.res)
+            filterItemCheck.isInvisible = item.filterCheck.not()
 
             parameterContainer.setOnClickListener {
                 onClickCallback?.invoke(item, pos)
             }
-
-            filterItemCheck.isInvisible = item.filterCheck.not()
         }
     }
 }

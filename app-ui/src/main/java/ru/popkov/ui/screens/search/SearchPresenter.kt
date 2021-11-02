@@ -18,7 +18,7 @@ class SearchPresenter : BasePresenter<SearchView>() {
     private var books: MutableList<BookResponse> = mutableListOf()
     private val filterInteractor: IFilterInteractor by inject()
 
-    fun loadData(request: String) {
+    private fun loadData(request: String) {
         val filter = filterInteractor.getFilterParameter()?.let { Filters.valueOf(it) }
         launchUI {
             val book = withIO {
@@ -32,6 +32,14 @@ class SearchPresenter : BasePresenter<SearchView>() {
             }
             books.addAll(mutableListOf(book))
             viewState.showBookList(book.items ?: emptyList())
+        }
+    }
+
+    fun createRequest(request: String) {
+        if (request.isNotEmpty()) {
+            loadData(request)
+        } else {
+            clearData()
         }
     }
 

@@ -28,7 +28,6 @@ class FilterPresenter : BasePresenter<FilterView>() {
     private fun initData() {
         val currentFilter = interactor.getFilterParameter()?.let { Filters.valueOf(it) }
         currentFilter?.let { setChecked(it) }
-
         viewState.updateFilterAdapter(filters)
     }
 
@@ -42,8 +41,8 @@ class FilterPresenter : BasePresenter<FilterView>() {
     }
 
     fun onClickFilter(item: FilterModel) {
-        interactor.setFilterParameter(item.parameter.name)
         setChecked(item.parameter)
+        interactor.setFilterParameter(item.parameter.name)
         viewState.updateFilterAdapter(filters)
     }
 }
