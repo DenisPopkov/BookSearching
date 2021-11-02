@@ -35,10 +35,10 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
             FilterModel(getString(Filters.PUBLISHER.res), whichChecked)
         )
 
-        binding.bookFilter.layoutManager = LinearLayoutManager(requireContext())
-        binding.bookFilter.adapter = FilterResAdapter(adapter, filters)
+        binding.filterBook.layoutManager = LinearLayoutManager(requireContext())
+        binding.filterBook.adapter = FilterResAdapter(adapter, filters)
 
-        binding.backToSearch.setOnClickListener {
+        binding.backToSearchScreen.setOnClickListener {
             presenter.navigationToSearch()
         }
     }

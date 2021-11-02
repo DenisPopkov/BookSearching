@@ -28,17 +28,17 @@ class FilterResAdapter(
         }
 
         val filter = parameters[position].parameter
-        holder.itemView.param.text = filter
-        holder.itemView.check_icon.isInvisible = rawIndex != position
+        holder.itemView.filterItemName.text = filter
+        holder.itemView.filterItemCheck.isInvisible = rawIndex != position
 
         holder.itemView.parameter_container.setOnClickListener {
             rawIndex = position
-            holder.itemView.check_icon.isInvisible = rawIndex != position
+            holder.itemView.filterItemCheck.isInvisible = rawIndex != position
             notifyDataSetChanged()
             filters.createPreferencesFile(filter)
         }
 
-        holder.itemView.check_icon.isInvisible = rawIndex != position
+        holder.itemView.filterItemCheck.isInvisible = rawIndex != position
     }
 
     override fun getItemCount() = parameters.size

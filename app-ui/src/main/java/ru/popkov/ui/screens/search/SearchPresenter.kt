@@ -10,7 +10,9 @@ import ru.popkov.domain.model.BookResponse
 import ru.popkov.domain.storage.IPreference
 import ru.popkov.ui.R
 import ru.popkov.ui.common.mvp.base.BasePresenter
+import ru.popkov.ui.model.FilterModel
 import ru.popkov.ui.navigation.Screens
+import ru.popkov.ui.utils.Filters
 
 @InjectViewState
 class SearchPresenter : BasePresenter<SearchView>() {
@@ -24,12 +26,11 @@ class SearchPresenter : BasePresenter<SearchView>() {
         launchUI {
             val book = withIO {
                 when (filter) {
-                    context.resources.getString(R.string.all_search) -> bookInteractor.getBooks(request)
-                    context.resources.getString(R.string.by_author) -> bookInteractor.getBooks("inauthor:$request")
-                    context.resources.getString(R.string.by_title) -> bookInteractor.getBooks("intitle:$request")
-                    context.resources.getString(R.string.by_genre) -> bookInteractor.getBooks("subject:$request")
-                    context.resources.getString(R.string.by_publisher) -> bookInteractor.getBooks("inpublisher:$request")
-                    else -> bookInteractor.getBooks("inauthor:$request")
+                    context.getString(Filters.AUTHOR.res) -> bookInteractor.getBooks("inauthor:$request")
+                    context.getString(Filters.TITLE.res) -> bookInteractor.getBooks("intitle:$request")
+                    context.getString(Filters.GENRE.res) -> bookInteractor.getBooks("subject:$request")
+                    context.getString(Filters.PUBLISHER.res) -> bookInteractor.getBooks("inpublisher:$request")
+                    else -> bookInteractor.getBooks(request)
                 }
             }
             books.addAll(mutableListOf(book))

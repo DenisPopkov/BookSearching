@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/param"
+        android:id="@+id/filterItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
@@ -19,11 +19,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/check_icon"
+        android:id="@+id/filterItemCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
-        android:src="@drawable/check_icon"
+        android:src="@drawable/filterItemCheck"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +38,6 @@
         android:background="#14212121"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/param" />
+        app:layout_constraintTop_toBottomOf="@+id/filterItemName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

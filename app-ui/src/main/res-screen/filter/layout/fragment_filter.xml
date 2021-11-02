@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/parameter_toolbar"
+        android:id="@+id/filter_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,7 +17,7 @@
             android:background="@color/toolbar_background">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/backToSearch"
+                android:id="@+id/backToSearchScreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -40,7 +40,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/backToSearch"
+                app:layout_constraintStart_toEndOf="@+id/backToSearchScreen"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -55,7 +55,7 @@
         android:textSize="16sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/book_filter"
+        android:id="@+id/filter_book"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="16dp"

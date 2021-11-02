@@ -67,8 +67,8 @@ class SearchFragment :
     }
 
     private fun createRequest() {
-        if (binding.userRequest.text.toString().isNotEmpty()) {
-            presenter.loadData(binding.userRequest.text.toString(), requireContext())
+        if (binding.searchUserField.text.toString().isNotEmpty()) {
+            presenter.loadData(binding.searchUserField.text.toString(), requireContext())
         } else {
             clearScreen()
         }
@@ -79,10 +79,10 @@ class SearchFragment :
             filterButton.setOnClickListener { presenter.navigationToFilter() }
         }
         binding.clearButton.setOnClickListener {
-            binding.userRequest.setText("")
+            binding.searchUserField.setText("")
             clearScreen()
         }
-        binding.userRequest.setOnKeyListener { _, keyCode, keyEvent ->
+        binding.searchUserField.setOnKeyListener { _, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 createRequest()
             }
@@ -90,7 +90,7 @@ class SearchFragment :
         }
 
 
-        binding.userRequest.createUserRequestWithDelay().debounce(1500).onEach {
+        binding.searchUserField.createUserRequestWithDelay().debounce(1500).onEach {
             createRequest()
             binding.clearButton.isInvisible = it.toString().isEmpty()
         }.launchIn(lifecycleScope)
