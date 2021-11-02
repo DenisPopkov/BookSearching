@@ -3,19 +3,15 @@ package ru.popkov.ui.screens.search
 import android.view.KeyEvent
 import android.view.View
 import androidx.core.view.isInvisible
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import moxy.presenter.InjectPresenter
 import org.koin.android.ext.android.inject
 import ru.popkov.domain.model.Item
-import ru.popkov.domain.storage.IPreference
+import ru.popkov.domain.storage.IFilterInteractor
 import ru.popkov.ui.R
 import ru.popkov.ui.common.ext.createUserRequestWithDelay
 import ru.popkov.ui.common.mvp.base.BaseFragment
@@ -23,6 +19,7 @@ import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
+import ru.popkov.ui.model.Filters
 import java.util.*
 
 class SearchFragment :
@@ -32,7 +29,7 @@ class SearchFragment :
     @InjectPresenter
     lateinit var presenter: SearchPresenter
 
-    private val filters: IPreference by inject()
+    private val interactor: IFilterInteractor by inject()
 
     private val bookAdapter by lazy {
         SimpleAdapter(BookItemBinding::inflate,
@@ -42,20 +39,20 @@ class SearchFragment :
     }
 
     override fun initViews() {
-        setListeners()
+        initListeners()
         binding.bookRecycler.adapter = bookAdapter
 
-        val filter = filters.getFilterParameter().toString()
+        val filter = interactor.getFilterParameter()?.let { Filters.valueOf(it) }
 
-        if (filter.isNotEmpty() && filter != "Поиск по всему") {
+        if (filter != null && filter != Filters.ALL) {
             binding.filterButton.setImageResource(R.drawable.filter_badge_icon)
         }
 
         if (bookAdapter.items.isEmpty()) binding.emptyRequest.visibility = View.VISIBLE
     }
 
-    override fun showBookList(items: List<Item>?) {
-        bookAdapter.swapItems(items!!.toMutableList())
+    override fun showBookList(items: List<Item>) {
+        bookAdapter.swapItems(items.toMutableList())
         if (items.isNotEmpty()) binding.emptyRequest.visibility = View.GONE
     }
 
@@ -66,7 +63,7 @@ class SearchFragment :
 
     private fun createRequest() {
         if (binding.searchUserField.text.toString().isNotEmpty()) {
-            presenter.loadData(binding.searchUserField.text.toString(), requireContext())
+            presenter.loadData(binding.searchUserField.text.toString())
         } else {
             clearScreen()
         }
@@ -74,7 +71,7 @@ class SearchFragment :
 
     @ExperimentalCoroutinesApi
     @FlowPreview
-    private fun setListeners() {
+    private fun initListeners() {
         binding.apply {
             filterButton.setOnClickListener { presenter.navigationToFilter() }
         }

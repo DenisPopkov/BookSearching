@@ -6,9 +6,8 @@ import ru.popkov.data.net.retrofit.LoggingInterceptorFactory
 import ru.popkov.data.net.retrofit.RetrofitFactory
 import ru.popkov.data.net.retrofit.ServerErrorInterceptor
 import ru.popkov.domain.interactors.BookInteractor
-import ru.popkov.domain.interactors.PreferencesInteractor
-import ru.popkov.domain.storage.IPreference
-import ru.popkov.domain.storage.PreferencesFilter
+import ru.popkov.domain.interactors.FilterInteractor
+import ru.popkov.domain.storage.IFilterInteractor
 
 private const val BASE_URL = "https://www.googleapis.com/books/v1/"
 
@@ -25,7 +24,7 @@ private fun org.koin.core.module.Module.provideInteractors() {
 private fun org.koin.core.module.Module.provideInterceptors() {
     single { LoggingInterceptorFactory.create() }
     single { ServerErrorInterceptor() }
-    single<IPreference> { PreferencesInteractor(get()) }
+    single<IFilterInteractor> { FilterInteractor(get()) }
 }
 
 private fun org.koin.core.module.Module.provideRetrofit() {

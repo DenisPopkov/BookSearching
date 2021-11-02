@@ -8,5 +8,5 @@ import ru.popkov.ui.common.mvp.base.BaseView
 interface SearchView : BaseView {
 
     @AddToEndSingle
-    fun showBookList(items: List<Item>?)
+    fun showBookList(items: List<Item>)
 }

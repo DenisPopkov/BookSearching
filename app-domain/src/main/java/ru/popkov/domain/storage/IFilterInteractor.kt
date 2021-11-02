@@ -1,6 +1,6 @@
 package ru.popkov.domain.storage
 
-interface PreferencesFilter {
+interface IFilterInteractor {
 
     fun setFilterParameter(filter: String)
     fun getFilterParameter(): String?

@@ -1,6 +1,6 @@
 package ru.popkov.ui.model
 
 data class FilterModel(
-    val parameter: String,
-    val filterCheck: Int
+    val parameter: Filters,
+    var filterCheck: Boolean
 )
