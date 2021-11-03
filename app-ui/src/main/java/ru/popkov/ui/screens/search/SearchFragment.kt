@@ -1,9 +1,10 @@
 package ru.popkov.ui.screens.search
 
-import android.view.KeyEvent
 import android.view.View
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
@@ -18,9 +19,8 @@ import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
-import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 import ru.popkov.ui.model.Filters
-import timber.log.Timber
+import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 import java.util.*
 
 class SearchFragment :
@@ -33,7 +33,8 @@ class SearchFragment :
     private val interactor: IFilterInteractor by inject()
 
     private val bookAdapter by lazy {
-        SimpleAdapter(BookItemBinding::inflate,
+        SimpleAdapter(
+            BookItemBinding::inflate,
             createViewHolder = { SearchViewHolder(it, requireContext()) },
             onClickCallback = null
         )
@@ -41,20 +42,28 @@ class SearchFragment :
 
     override fun initViews() {
         initListeners()
-        binding.bookRecycler.adapter = bookAdapter
+        setAdapter()
+        filterChangedBehavior()
+    }
 
+    private fun filterChangedBehavior() {
         val filter = interactor.getFilterParameter()?.let { Filters.valueOf(it) }
 
         if (filter != null && filter != Filters.ALL) {
             binding.filterButton.setImageResource(R.drawable.filter_badge_icon)
         }
 
-        if (bookAdapter.items.isEmpty()) binding.emptyRequest.visibility = View.VISIBLE
+        binding.emptyRequest.isInvisible = bookAdapter.items.isEmpty()
+    }
+
+    private fun setAdapter() {
+        binding.bookRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.bookRecycler.adapter = bookAdapter
     }
 
     override fun showBookList(items: List<Item>) {
         bookAdapter.swapItems(items.toMutableList())
-        if (items.isNotEmpty()) binding.emptyRequest.visibility = View.GONE
+        binding.emptyRequest.isVisible = items.isNotEmpty()
     }
 
     @ExperimentalCoroutinesApi
@@ -70,9 +79,8 @@ class SearchFragment :
         }
 
         binding.searchUserField.setOnKeyListener { _, keyCode, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                presenter.createRequest(binding.searchUserField.text.toString())
-            }
+            val currentUserBookRequest = binding.searchUserField.text.toString()
+            presenter.onKeyboardEnterButtonPushed(keyEvent, keyCode, currentUserBookRequest)
             return@setOnKeyListener true
         }
 

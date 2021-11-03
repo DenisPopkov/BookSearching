@@ -1,5 +1,6 @@
 package ru.popkov.ui.screens.search
 
+import android.view.KeyEvent
 import moxy.InjectViewState
 import org.koin.core.component.inject
 import ru.popkov.domain.ext.launchUI
@@ -40,6 +41,12 @@ class SearchPresenter : BasePresenter<SearchView>() {
             loadData(request)
         } else {
             clearData()
+        }
+    }
+
+    fun onKeyboardEnterButtonPushed(keyEvent: KeyEvent, keyCode: Int, request: String) {
+        if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+            createRequest(request)
         }
     }
 
