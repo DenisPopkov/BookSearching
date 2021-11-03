@@ -53,7 +53,7 @@ class SearchFragment :
             binding.filterButton.setImageResource(R.drawable.filter_badge_icon)
         }
 
-        binding.emptyRequest.isInvisible = bookAdapter.items.isEmpty()
+        binding.emptyRequest.isVisible = bookAdapter.items.isEmpty()
     }
 
     private fun setAdapter() {
@@ -63,7 +63,7 @@ class SearchFragment :
 
     override fun showBookList(items: List<Item>) {
         bookAdapter.swapItems(items.toMutableList())
-        binding.emptyRequest.isVisible = items.isNotEmpty()
+        binding.emptyRequest.isVisible = items.isEmpty()
     }
 
     @ExperimentalCoroutinesApi
