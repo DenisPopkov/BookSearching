@@ -23,12 +23,18 @@
         <entry key="..\:/BookSearch/app-ui/src/main/res/layout/activity_main.xml" value="0.15185185185185185" />
         <entry key="..\:/BookSearch/app-ui/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19583333333333333" />
         <entry key="..\:/BookSearch/app-ui/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-component/books/layout/book_item.xml" value="0.1712962962962963" />
         <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-component/toolbars/drawable/ic_launcher_foreground.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/filter/layout/fragment_filter.xml" value="0.1796875" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-component/toolbars/layout/filter_toolbar.xml" value="0.1712962962962963" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-component/toolbars/layout/search_toolbar.xml" value="0.1712962962962963" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/details/layout-v28/fragment_detail.xml" value="0.1796875" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/details/layout/fragment_detail.xml" value="0.22" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/filter/layout/fragment_filter.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/filter/layout/parameter_item.xml" value="0.1796875" />
-        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/search/layout/fragment_search.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res-screen/search/layout/fragment_search.xml" value="0.1" />
         <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res/drawable/ic_launcher_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res/font/roboto_bold.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/popko/Desktop/BookSearch/app-ui/src/main/res/layout/activity_main.xml" value="0.1796875" />
       </map>
     </option>

@@ -1,6 +1,8 @@
 package ru.popkov.ui.screens.search
 
+import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +22,7 @@ import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.model.Filters
+import ru.popkov.ui.screens.details.DetailFragment
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 import java.util.*
 
@@ -32,11 +35,13 @@ class SearchFragment :
 
     private val interactor: IFilterInteractor by inject()
 
+    private lateinit var bookForDetail: List<Item>
+
     private val bookAdapter by lazy {
         SimpleAdapter(
             BookItemBinding::inflate,
             createViewHolder = { SearchViewHolder(it, requireContext()) },
-            onClickCallback = null
+            onClickCallback = { _, pos -> presenter.navigateToDetailScreen() }
         )
     }
 
@@ -62,6 +67,7 @@ class SearchFragment :
     }
 
     override fun showBookList(items: List<Item>) {
+        bookForDetail = items.toMutableList()
         bookAdapter.swapItems(items.toMutableList())
         binding.emptyRequest.isVisible = items.isEmpty()
     }
