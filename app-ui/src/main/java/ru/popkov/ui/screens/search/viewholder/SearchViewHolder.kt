@@ -4,6 +4,7 @@ import android.content.Context
 import com.bumptech.glide.Glide
 import ru.popkov.domain.model.Item
 import ru.popkov.ui.R
+import ru.popkov.ui.common.ext.toHttps
 import ru.popkov.ui.common.views.recycler.SimpleViewHolder
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.navigation.Screens
@@ -18,8 +19,7 @@ class SearchViewHolder(private val binding: BookItemBinding, private val context
     ) {
 
         with(binding) {
-            var imgUrl = item.volumeInfo?.imageLinks?.smallThumbnail.toString()
-            imgUrl = imgUrl.replace("http", "https")
+            val imgUrl = item.volumeInfo?.imageLinks?.smallThumbnail?.toHttps()
             Glide.with(context)
                 .load(imgUrl)
                 .placeholder(R.drawable.book_placeholder)

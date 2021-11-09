@@ -1,8 +1,7 @@
 package ru.popkov.ui.screens.search
 
-import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +21,6 @@ import ru.popkov.ui.common.views.recycler.SimpleAdapter
 import ru.popkov.ui.databinding.BookItemBinding
 import ru.popkov.ui.databinding.FragmentSearchBinding
 import ru.popkov.ui.model.Filters
-import ru.popkov.ui.screens.details.DetailFragment
 import ru.popkov.ui.screens.search.viewholder.SearchViewHolder
 import java.util.*
 
@@ -41,7 +39,7 @@ class SearchFragment :
         SimpleAdapter(
             BookItemBinding::inflate,
             createViewHolder = { SearchViewHolder(it, requireContext()) },
-            onClickCallback = { _, pos -> presenter.navigateToDetailScreen() }
+            onClickCallback = { _, pos -> presenter.navigateToDetailScreen(bookForDetail[pos]) }
         )
     }
 

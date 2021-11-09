@@ -1,21 +1,23 @@
 package ru.popkov.ui.screens.details
 
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import moxy.presenter.InjectPresenter
 import ru.popkov.domain.model.Item
+import ru.popkov.ui.R
+import ru.popkov.ui.common.ext.toHttps
+import ru.popkov.ui.common.ext.uploadImage
 import ru.popkov.ui.common.mvp.base.BaseFragment
 import ru.popkov.ui.databinding.FragmentDetailBinding
 
-class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate),
-    DetailView {
+class DetailFragment(
+    private val detailBookItem: Item,
+) : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate), DetailView {
 
     @InjectPresenter
     lateinit var presenter: DetailPresenter
 
     override fun initViews() {
         setListeners()
-        presenter.getData()
+        setUpDetailBookInformation()
     }
 
     private fun setListeners() {
@@ -24,12 +26,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         }
     }
 
-    override fun showBook(item: List<Item>) {
-        Toast.makeText(requireContext(), item.first().volumeInfo?.title + " Thats", Toast.LENGTH_SHORT).show()
-        Glide.with(requireContext())
-            .load(item.first().volumeInfo?.imageLinks).into(binding.detailBookImage)
-        binding.detailTitle.text = item.first().volumeInfo?.title
-        binding.detailAuthorName.text = item.first().volumeInfo?.authors?.first()
-        binding.detailDescription.text = item.first().volumeInfo?.description
+    private fun setUpDetailBookInformation() {
+        val book = detailBookItem.volumeInfo
+        val detailBookImageUrl = book?.imageLinks?.thumbnail?.toHttps().toString()
+        with(binding) {
+            detailBookImage.uploadImage(detailBookImageUrl, R.drawable.book_placeholder)
+            detailTitle.text = book?.title
+            detailAuthorName.text = book?.authors?.first()
+            detailDescription.text = book?.description
+        }
     }
 }

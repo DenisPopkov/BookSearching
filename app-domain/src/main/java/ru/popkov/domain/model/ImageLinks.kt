@@ -9,5 +9,8 @@ import kotlinx.parcelize.Parcelize
 data class ImageLinks(
     @SerializedName("smallThumbnail")
     @Expose
-    val smallThumbnail: String? = null
+    val smallThumbnail: String? = null,
+    @SerializedName("thumbnail")
+    @Expose
+    val thumbnail: String? = null
 ): Parcelable

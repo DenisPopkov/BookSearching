@@ -38,13 +38,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/detail_toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_toolbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/detail_toolbar">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/detail_book_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="359dp"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/turtle" />
 

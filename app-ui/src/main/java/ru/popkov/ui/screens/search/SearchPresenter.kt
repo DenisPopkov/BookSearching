@@ -65,8 +65,7 @@ class SearchPresenter : BasePresenter<SearchView>() {
         router.navigateTo(Screens.Filter())
     }
 
-    fun navigateToDetailScreen() {
-        router.sendResult("detail", books.first().items ?: emptyList<Item>())
-        router.navigateTo(Screens.Detail())
+    fun navigateToDetailScreen(book: Item) {
+        router.navigateTo(Screens.Detail(book))
     }
 }

@@ -12,5 +12,5 @@ object Screens {
 
     fun Filter() = FragmentScreen { FilterFragment() }
     fun Search() = FragmentScreen { SearchFragment() }
-    fun Detail() = FragmentScreen { DetailFragment() }
+    fun Detail(detailBook: Item) = FragmentScreen { DetailFragment(detailBook) }
 }
